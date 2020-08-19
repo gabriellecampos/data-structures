@@ -25,6 +25,8 @@ public class BinarySearchTree {
             this.root = newNode;
         } else if (data <= root.data) {
             root.left = newNode;
+        } else {
+            root.right = newNode;
         }
     }
 }

@@ -35,4 +35,15 @@ public class BinarySearchTreeTest {
         assertThat(binarySearchTree.getRoot().getLeft().getData()).isEqualTo(4);
         assertThat(binarySearchTree.getRoot().getRight()).isNull();
     }
+
+    @Test
+    public void shouldInsertElementInTheRightNodeWhenItIsGreaterThanRoot() {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(4);
+        binarySearchTree.insert(5);
+        assertThat(binarySearchTree.getRoot().getData()).isEqualTo(4);
+        assertThat(binarySearchTree.getRoot().getRight()).isNotNull();
+        assertThat(binarySearchTree.getRoot().getRight().getData()).isEqualTo(5);
+        assertThat(binarySearchTree.getRoot().getLeft()).isNull();
+    }
 }
