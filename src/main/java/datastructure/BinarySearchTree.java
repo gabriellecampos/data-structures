@@ -18,15 +18,19 @@ public class BinarySearchTree {
 
     private Node root;
 
-    public void insert(int data) {
-        Node newNode = new Node(data);
+    public void insert(int data){
+        root = insert(root, data);
+    }
 
-        if (root == null) {
-            this.root = newNode;
-        } else if (data <= root.data) {
-            root.left = newNode;
+    private Node insert(Node current, int data) {
+        if (current == null) {
+            current = new Node(data);
+            return current;
+        } else if (data <= current.data) {
+            current.left = insert(current.left, data);
         } else {
-            root.right = newNode;
+            root.right = new Node(data);
         }
+        return current;
     }
 }
