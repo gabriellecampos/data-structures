@@ -29,7 +29,7 @@ public class BinarySearchTree {
         } else if (data <= current.data) {
             current.left = insert(current.left, data);
         } else {
-            root.right = new Node(data);
+            current.right = insert(current.right, data);
         }
         return current;
     }

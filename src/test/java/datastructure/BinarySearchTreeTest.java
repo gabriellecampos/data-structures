@@ -58,4 +58,21 @@ public class BinarySearchTreeTest {
         assertThat(binarySearchTree.getRoot().getLeft().getData()).isEqualTo(4);
         assertThat(binarySearchTree.getRoot().getLeft().getLeft().getData()).isEqualTo(3);
     }
+
+    @Test
+    public void shouldInsertElementInRightSubTreeWhenItIsGreaterThanParent() {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(5);
+        binarySearchTree.insert(4);
+        binarySearchTree.insert(3);
+        binarySearchTree.insert(6);
+        binarySearchTree.insert(7);
+        assertThat(binarySearchTree.getRoot().getData()).isEqualTo(5);
+        assertThat(binarySearchTree.getRoot().getRight()).isNotNull();
+        assertThat(binarySearchTree.getRoot().getRight().getData()).isEqualTo(6);
+        assertThat(binarySearchTree.getRoot().getRight().getRight().getData()).isEqualTo(7);
+        assertThat(binarySearchTree.getRoot().getLeft()).isNotNull();
+        assertThat(binarySearchTree.getRoot().getLeft().getData()).isEqualTo(4);
+        assertThat(binarySearchTree.getRoot().getLeft().getLeft().getData()).isEqualTo(3);
+    }
 }
