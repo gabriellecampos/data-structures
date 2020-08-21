@@ -106,4 +106,35 @@ public class BinarySearchTreeTest {
         String inOrder = binarySearchTree.inOrder();
         assertThat(inOrder).isEqualTo("33");
     }
+
+    @Test
+    public void shouldReturnPreOrderTraversalStringWhenTreeIsNotEmpty() {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(31);
+        binarySearchTree.insert(78);
+        binarySearchTree.insert(90);
+        binarySearchTree.insert(1);
+        binarySearchTree.insert(43);
+        binarySearchTree.insert(7);
+        binarySearchTree.insert(25);
+        binarySearchTree.insert(83);
+        String preOrder = binarySearchTree.preOrder();
+        assertThat(preOrder).isEqualTo("31,1,7,25,78,43,90,83");
+    }
+
+    @Test
+    public void shouldReturnEmptyStringForPreOrderTraversalWhenTreeIsEmpty() {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        String preOrder = binarySearchTree.preOrder();
+        assertThat(preOrder).isEmpty();
+    }
+
+    @Test
+    public void shouldReturnRootPreOrderWhenTreeHasOnlyOneElement() {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(8);
+        String preOrder = binarySearchTree.preOrder();
+        assertThat(preOrder).isEqualTo("8");
+    }
+
 }

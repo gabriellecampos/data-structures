@@ -26,6 +26,16 @@ public class BinarySearchTree {
             return order;
         }
 
+        public StringBuilder preOrder(StringBuilder order) {
+            order.append(data).append(",");
+            if (left != null) {
+                left.preOrder(order);
+            }
+            if (right != null)
+                right.preOrder(order);
+
+            return order;
+        }
     }
 
     private Node root;
@@ -53,5 +63,14 @@ public class BinarySearchTree {
             inOrder = treeInOrder.substring(0, treeInOrder.length() - 1);
         }
         return inOrder;
+    }
+
+    public String preOrder() {
+        String preOrder = "";
+        if (root != null) {
+            String treePreOrder = root.preOrder(new StringBuilder()).toString();
+            preOrder = treePreOrder.substring(0, treePreOrder.length() - 1);
+        }
+        return preOrder;
     }
 }
