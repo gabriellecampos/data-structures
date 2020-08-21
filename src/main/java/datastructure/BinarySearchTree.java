@@ -36,6 +36,17 @@ public class BinarySearchTree {
 
             return order;
         }
+
+        public StringBuilder postOrder(StringBuilder order) {
+            if (left != null) {
+                left.postOrder(order);
+            }
+            if (right != null) {
+                right.postOrder(order);
+            }
+            order.append(data).append(",");
+            return order;
+        }
     }
 
     private Node root;
@@ -73,4 +84,14 @@ public class BinarySearchTree {
         }
         return preOrder;
     }
+
+    public String postOrder() {
+        String postOrder = "";
+        if (root != null) {
+            String treePostOrder = root.postOrder(new StringBuilder()).toString();
+            postOrder = treePostOrder.substring(0, treePostOrder.length() - 1);
+        }
+        return postOrder;
+    }
+
 }

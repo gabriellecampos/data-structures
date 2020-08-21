@@ -137,4 +137,33 @@ public class BinarySearchTreeTest {
         assertThat(preOrder).isEqualTo("8");
     }
 
+    @Test
+    public void shouldReturnPostOrderTraversalStringWhenTreeIsNotEmpty() {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(52);
+        binarySearchTree.insert(14);
+        binarySearchTree.insert(39);
+        binarySearchTree.insert(88);
+        binarySearchTree.insert(76);
+        binarySearchTree.insert(56);
+        binarySearchTree.insert(6);
+        binarySearchTree.insert(102);
+        String postOrder = binarySearchTree.postOrder();
+        assertThat(postOrder).isEqualTo("6,39,14,56,76,102,88,52");
+    }
+
+    @Test
+    public void shouldReturnEmptyStringForPostOrderTraversalWhenTreeIsEmpty() {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        String postOrder = binarySearchTree.postOrder();
+        assertThat(postOrder).isEmpty();
+    }
+
+    @Test
+    public void shouldReturnRootPosteOrderWhenTreeHasOnlyOneElement() {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(29);
+        String postOrder = binarySearchTree.postOrder();
+        assertThat(postOrder).isEqualTo("29");
+    }
 }
