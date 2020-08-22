@@ -1,5 +1,6 @@
 package datastructure;
 
+import exception.MyNodeNotFoundException;
 import lombok.Getter;
 
 @Getter
@@ -92,6 +93,22 @@ public class BinarySearchTree {
             postOrder = treePostOrder.substring(0, treePostOrder.length() - 1);
         }
         return postOrder;
+    }
+
+    public Node find(int number) throws MyNodeNotFoundException {
+        return find(root, number);
+    }
+
+    private Node find(Node current, int data) throws MyNodeNotFoundException {
+        if (current == null) {
+            throw new MyNodeNotFoundException();
+        } else if (current.data == data) {
+            return current;
+        } else if (data < current.data) {
+            return find(current.left, data);
+        } else {
+            return find(current.right, data);
+        }
     }
 
 }

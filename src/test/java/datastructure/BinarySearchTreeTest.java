@@ -1,5 +1,6 @@
 package datastructure;
 
+import exception.MyNodeNotFoundException;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -165,5 +166,49 @@ public class BinarySearchTreeTest {
         binarySearchTree.insert(29);
         String postOrder = binarySearchTree.postOrder();
         assertThat(postOrder).isEqualTo("29");
+    }
+
+    @Test
+    public void shouldReturnNodeWhenItExistsInTreeAndIsSmallerThanRoot() throws MyNodeNotFoundException {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(30);
+        binarySearchTree.insert(75);
+        binarySearchTree.insert(5);
+        binarySearchTree.insert(21);
+        binarySearchTree.insert(12);
+        binarySearchTree.insert(41);
+        BinarySearchTree.Node node = binarySearchTree.find(5);
+        assertThat(node).isNotNull();
+        assertThat(node.getData()).isEqualTo(5);
+    }
+
+    @Test
+    public void shouldReturnNodeWhenItExistsInTreeAndIsGreaterThanRoot() throws MyNodeNotFoundException {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(30);
+        binarySearchTree.insert(75);
+        binarySearchTree.insert(5);
+        binarySearchTree.insert(44);
+        binarySearchTree.insert(12);
+        binarySearchTree.insert(41);
+        BinarySearchTree.Node node = binarySearchTree.find(44);
+        assertThat(node).isNotNull();
+        assertThat(node.getData()).isEqualTo(44);
+    }
+
+    @Test(expected = MyNodeNotFoundException.class)
+    public void shouldThrowExceptionWhenTryingToFindNodeThatDoesntExist() throws MyNodeNotFoundException {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(30);
+        binarySearchTree.insert(75);
+        binarySearchTree.insert(5);
+        binarySearchTree.insert(41);
+        binarySearchTree.find(1);
+    }
+
+    @Test(expected = MyNodeNotFoundException.class)
+    public void shouldThrowExceptionWhenTryingToFindNodeInEmptyTree() throws MyNodeNotFoundException {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.find(1);
     }
 }
