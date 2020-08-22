@@ -111,4 +111,40 @@ public class BinarySearchTree {
         }
     }
 
+    public void remove(int number) throws MyNodeNotFoundException {
+        root = remove(root, number);
+    }
+
+    private Node remove(Node current, int data) throws MyNodeNotFoundException {
+        if(current == null){
+            throw new MyNodeNotFoundException();
+        }else if(data < current.data){
+            current.left = remove(current.left, data);
+            return current;
+        }else if(data > current.data){
+            current.right = remove(current.right, data);
+            return current;
+        }else{
+            if(current.left == null && current.right == null){
+                return null;
+            }else if (current.left == null){
+                return current.right;
+            }else if(current.right == null){
+                return current.left;
+            }else{
+                int minValue = minValue(current.right);
+                current.data = minValue;
+                current.right = remove(current.right, minValue);
+            }
+        }
+        return current;
+    }
+
+    private int minValue(Node current){
+        if(current.left != null){
+            return minValue(current.left);
+        }
+        return current.data;
+    }
+
 }

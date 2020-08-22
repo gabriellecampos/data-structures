@@ -211,4 +211,91 @@ public class BinarySearchTreeTest {
         BinarySearchTree binarySearchTree = new BinarySearchTree();
         binarySearchTree.find(1);
     }
+
+    @Test
+    public void shouldRemoveNodeWhenItExistsInTheTreeAndHasTwoChildren() throws MyNodeNotFoundException {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(10);
+        binarySearchTree.insert(33);
+        binarySearchTree.insert(89);
+        binarySearchTree.insert(41);
+        binarySearchTree.insert(27);
+        binarySearchTree.insert(5);
+        binarySearchTree.insert(1);
+        binarySearchTree.insert(9);
+        binarySearchTree.remove(33);
+        String inOrder = binarySearchTree.inOrder();
+        assertThat(inOrder).isEqualTo("1,5,9,10,27,41,89");
+    }
+
+    @Test
+    public void shouldRemoveNodeWhenItExistsInTheTreeAndHasOnlyLeftChildren() throws MyNodeNotFoundException {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(10);
+        binarySearchTree.insert(33);
+        binarySearchTree.insert(89);
+        binarySearchTree.insert(41);
+        binarySearchTree.insert(27);
+        binarySearchTree.insert(5);
+        binarySearchTree.insert(1);
+        binarySearchTree.insert(9);
+        binarySearchTree.remove(89);
+        String inOrder = binarySearchTree.inOrder();
+        assertThat(inOrder).isEqualTo("1,5,9,10,27,33,41");
+    }
+
+    @Test
+    public void shouldRemoveNodeWhenItExistsInTheTreeAndHasOnlyRightChildren() throws MyNodeNotFoundException {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(10);
+        binarySearchTree.insert(33);
+        binarySearchTree.insert(89);
+        binarySearchTree.insert(41);
+        binarySearchTree.insert(27);
+        binarySearchTree.insert(5);
+        binarySearchTree.insert(9);
+        binarySearchTree.remove(5);
+        String inOrder = binarySearchTree.inOrder();
+        assertThat(inOrder).isEqualTo("9,10,27,33,41,89");
+    }
+
+    @Test
+    public void shouldRemoveNodeWhenItExistsInTheTreeAndHasNoChildren() throws MyNodeNotFoundException {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(10);
+        binarySearchTree.insert(33);
+        binarySearchTree.insert(89);
+        binarySearchTree.insert(41);
+        binarySearchTree.insert(27);
+        binarySearchTree.insert(5);
+        binarySearchTree.insert(1);
+        binarySearchTree.insert(9);
+        binarySearchTree.remove(27);
+        String inOrder = binarySearchTree.inOrder();
+        assertThat(inOrder).isEqualTo("1,5,9,10,33,41,89");
+    }
+
+    @Test
+    public void shouldSetRootAsNullWhenRemovingOnlyElementInTree() throws MyNodeNotFoundException {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(10);
+        assertThat(binarySearchTree.inOrder()).isEqualTo("10");
+
+        binarySearchTree.remove(10);
+        assertThat(binarySearchTree.getRoot()).isNull();
+    }
+
+    @Test(expected = MyNodeNotFoundException.class)
+    public void shouldThrowExceptionWhenRemovingNumberThatDoesntExistInTree() throws MyNodeNotFoundException {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(10);
+        binarySearchTree.insert(33);
+        binarySearchTree.insert(89);
+        binarySearchTree.insert(41);
+        binarySearchTree.insert(27);
+        binarySearchTree.insert(5);
+        binarySearchTree.insert(1);
+        binarySearchTree.insert(9);
+        binarySearchTree.remove(100);
+    }
 }
