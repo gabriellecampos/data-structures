@@ -298,4 +298,77 @@ public class BinarySearchTreeTest {
         binarySearchTree.insert(9);
         binarySearchTree.remove(100);
     }
+
+    @Test
+    public void shouldHaveDistanceZeroWhenNumbersAreTheSame() throws MyNodeNotFoundException {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(5);
+        binarySearchTree.insert(2);
+        binarySearchTree.insert(12);
+        binarySearchTree.insert(1);
+        binarySearchTree.insert(3);
+        binarySearchTree.insert(9);
+        binarySearchTree.insert(21);
+        assertThat(binarySearchTree.distance(12,12)).isZero();
+    }
+
+    @Test
+    public void shouldHaveDistanceWhenNumbersArePresentInTree() throws MyNodeNotFoundException {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(5);
+        binarySearchTree.insert(2);
+        binarySearchTree.insert(12);
+        binarySearchTree.insert(1);
+        binarySearchTree.insert(3);
+        binarySearchTree.insert(9);
+        binarySearchTree.insert(21);
+        binarySearchTree.insert(19);
+        binarySearchTree.insert(30);
+        assertThat(binarySearchTree.distance(3,9)).isEqualTo(4);
+    }
+
+    @Test
+    public void shouldHaveDistanceWhenNumbersAreSmallerThanRoot() throws MyNodeNotFoundException {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(5);
+        binarySearchTree.insert(2);
+        binarySearchTree.insert(12);
+        binarySearchTree.insert(1);
+        binarySearchTree.insert(3);
+        binarySearchTree.insert(9);
+        binarySearchTree.insert(21);
+        binarySearchTree.insert(19);
+        binarySearchTree.insert(30);
+        assertThat(binarySearchTree.distance(3,2)).isEqualTo(1);
+    }
+
+    @Test
+    public void shouldHaveDistanceWhenNumbersAreBiggerThanRoot() throws MyNodeNotFoundException {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(5);
+        binarySearchTree.insert(2);
+        binarySearchTree.insert(12);
+        binarySearchTree.insert(1);
+        binarySearchTree.insert(3);
+        binarySearchTree.insert(9);
+        binarySearchTree.insert(21);
+        binarySearchTree.insert(19);
+        binarySearchTree.insert(30);
+        assertThat(binarySearchTree.distance(30,9)).isEqualTo(3);
+    }
+
+    @Test(expected = MyNodeNotFoundException.class)
+    public void shouldThrowExceptionWhenOneOfTheNumbersIsNotPresentInTree() throws MyNodeNotFoundException {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        binarySearchTree.insert(5);
+        binarySearchTree.insert(2);
+        binarySearchTree.insert(12);
+        binarySearchTree.insert(1);
+        binarySearchTree.insert(3);
+        binarySearchTree.insert(9);
+        binarySearchTree.insert(21);
+        binarySearchTree.insert(19);
+        binarySearchTree.insert(30);
+        binarySearchTree.distance(25,9);
+    }
 }

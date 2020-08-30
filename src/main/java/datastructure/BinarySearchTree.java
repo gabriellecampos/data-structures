@@ -95,6 +95,43 @@ public class BinarySearchTree {
         return postOrder;
     }
 
+    public int distance(int a, int b) throws MyNodeNotFoundException {
+        int temp;
+
+        if(a > b){
+            temp = a;
+            a = b;
+            b = temp;
+        }
+        return distance(root, a ,b);
+    }
+
+    private int distance(Node current, int a, int b) throws MyNodeNotFoundException {
+        if(current == null){
+            return 0;
+        }
+        if(a < current.data && b < current.data){
+            return distance(current.left, a ,b);
+        }
+        if(a > current.data && b> current.data){
+            return distance(current.right, a, b);
+        }
+        return nodeDistance(current, a) + nodeDistance(current, b);
+    }
+
+    private int nodeDistance(Node current, int data) throws MyNodeNotFoundException {
+        if(current == null){
+            throw new MyNodeNotFoundException();
+        }
+        if(data == current.data){
+            return 0;
+        }
+        if(data < current.data){
+            return 1 + nodeDistance(current.left, data);
+        }
+        return 1 + nodeDistance(current.right, data);
+    }
+
     public Node find(int number) throws MyNodeNotFoundException {
         return find(root, number);
     }
