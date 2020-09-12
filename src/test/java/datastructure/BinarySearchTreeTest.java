@@ -344,9 +344,33 @@ public class BinarySearchTreeTest {
     }
 
     @Test
-    public void shouldNotFindNodeThroughtBreadthFirstSearchWhenItExistsInTheTree() throws EmptyStructureException {
+    public void shouldNotFindNodeThroughtBreadthFirstSearchWhenItNotExistsInTheTree() throws EmptyStructureException {
         BinarySearchTree binarySearchTree = getThreeLevelTree();
         assertThat(binarySearchTree.breadthFirstSearch(31)).isFalse();
+    }
+
+    @Test
+    public void shouldNotFindNodeThroughtBreadthFirstSearchWhenTreeIsEmpty() throws EmptyStructureException {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        assertThat(binarySearchTree.breadthFirstSearch(31)).isFalse();
+    }
+
+    @Test
+    public void shouldFindNodeThroughtDepthFirstSearchWhenItExistsInTheTree() throws EmptyStructureException {
+        BinarySearchTree binarySearchTree = getThreeLevelTree();
+        assertThat(binarySearchTree.depthFirstSearch(21)).isTrue();
+    }
+
+    @Test
+    public void shouldNotFindNodeThroughtDepthFirstSearchWhenItNotExistsInTheTree() throws EmptyStructureException {
+        BinarySearchTree binarySearchTree = getThreeLevelTree();
+        assertThat(binarySearchTree.depthFirstSearch(99)).isFalse();
+    }
+
+    @Test
+    public void shouldNotFindNodeThroughtDepthFirstSearchWhenTreeIsEmpty() throws EmptyStructureException {
+        BinarySearchTree binarySearchTree = new BinarySearchTree();
+        assertThat(binarySearchTree.depthFirstSearch(31)).isFalse();
     }
 
     private BinarySearchTree getThreeLevelTree(){

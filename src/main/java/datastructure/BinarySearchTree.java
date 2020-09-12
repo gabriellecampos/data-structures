@@ -184,8 +184,41 @@ public class BinarySearchTree {
         return current;
     }
 
+    public boolean depthFirstSearch(int value) throws EmptyStructureException {
+        if(root != null){
+            return depthFirstSearch(root, value);
+        }
+        return false;
+    }
+
+    private boolean depthFirstSearch(Node root, int value) throws EmptyStructureException {
+        StackLinkedList<Node> stack = new StackLinkedList<>();
+        Node current = root;
+        stack.push(root);
+
+        while (!stack.isEmpty()){
+            while(current.left != null){
+                current = current.left;
+                stack.push(current);
+            }
+            current = stack.pop();
+            System.out.print(String.format("%d,", current.data));
+            if(current.data == value){
+                return true;
+            }
+            if(current.right != null){
+                current = current.right;
+                stack.push(current);
+            }
+        }
+        return false;
+    }
+
     public boolean breadthFirstSearch(int value) throws EmptyStructureException {
-        return breadthFirstSearch(root, value);
+        if(root != null){
+            return breadthFirstSearch(root, value);
+        }
+        return false;
     }
 
     private  boolean breadthFirstSearch(Node root, int value) throws EmptyStructureException {
