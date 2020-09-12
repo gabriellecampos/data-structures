@@ -11,13 +11,11 @@ public class BinarySearchTree {
     public class Node {
 
         int data;
-        boolean visited;
         Node left;
         Node right;
 
         public Node(int data) {
             this.data = data;
-            this.visited = false;
         }
 
         public StringBuilder inOrder(StringBuilder order) {
@@ -52,9 +50,6 @@ public class BinarySearchTree {
             return order;
         }
 
-        public void visit(){
-            this.visited = true;
-        }
     }
 
     private Node root;
@@ -223,7 +218,6 @@ public class BinarySearchTree {
 
     private  boolean breadthFirstSearch(Node root, int value) throws EmptyStructureException {
         QueueLinkedList<Node> queue = new QueueLinkedList<>();
-        root.visit();
         queue.add(root);
 
         while(!queue.isEmpty()) {
@@ -231,24 +225,17 @@ public class BinarySearchTree {
             System.out.print(String.format("%d,", queuedNode.data));
             if (queuedNode.data == value) {
                 return true;
-            } else {
-                Node leftAdjacentNode = queuedNode.left;
-                Node rightAdjacentNode = queuedNode.right;
-                if(isValidNode(leftAdjacentNode)){
-                    leftAdjacentNode.visit();
-                    queue.add(leftAdjacentNode);
-                }
-                if(isValidNode(rightAdjacentNode)){
-                    rightAdjacentNode.visit();
-                    queue.add(rightAdjacentNode);
-                }
+            }
+            Node leftAdjacentNode = queuedNode.left;
+            Node rightAdjacentNode = queuedNode.right;
+            if(leftAdjacentNode != null){
+                queue.add(leftAdjacentNode);
+            }
+            if(rightAdjacentNode != null){
+                queue.add(rightAdjacentNode);
             }
         }
         return false;
-    }
-
-    private boolean isValidNode(Node node){
-        return node != null && !node.isVisited();
     }
 
     private int minValue(Node current){
