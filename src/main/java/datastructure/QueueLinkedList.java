@@ -44,6 +44,10 @@ public class QueueLinkedList<T> {
         return data;
     }
 
+    public boolean isEmpty(){
+        return first == null && last == null;
+    }
+
     public void printQueue(){
         if(first == null){
             System.out.println("Empty Queue");

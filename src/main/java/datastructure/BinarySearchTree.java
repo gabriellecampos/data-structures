@@ -1,5 +1,6 @@
 package datastructure;
 
+import exception.EmptyStructureException;
 import exception.MyNodeNotFoundException;
 import lombok.Getter;
 
@@ -10,11 +11,13 @@ public class BinarySearchTree {
     public class Node {
 
         int data;
+        boolean visited;
         Node left;
         Node right;
 
         public Node(int data) {
             this.data = data;
+            this.visited = false;
         }
 
         public StringBuilder inOrder(StringBuilder order) {
@@ -47,6 +50,10 @@ public class BinarySearchTree {
             }
             order.append(data).append(",");
             return order;
+        }
+
+        public void visit(){
+            this.visited = true;
         }
     }
 
@@ -175,6 +182,40 @@ public class BinarySearchTree {
             }
         }
         return current;
+    }
+
+    public boolean breadthFirstSearch(int value) throws EmptyStructureException {
+        return breadthFirstSearch(root, value);
+    }
+
+    private  boolean breadthFirstSearch(Node root, int value) throws EmptyStructureException {
+        QueueLinkedList<Node> queue = new QueueLinkedList<>();
+        root.visit();
+        queue.add(root);
+
+        while(!queue.isEmpty()) {
+            Node queuedNode = queue.remove();
+            System.out.print(String.format("%d,", queuedNode.data));
+            if (queuedNode.data == value) {
+                return true;
+            } else {
+                Node leftAdjacentNode = queuedNode.left;
+                Node rightAdjacentNode = queuedNode.right;
+                if(isValidNode(leftAdjacentNode)){
+                    leftAdjacentNode.visit();
+                    queue.add(leftAdjacentNode);
+                }
+                if(isValidNode(rightAdjacentNode)){
+                    rightAdjacentNode.visit();
+                    queue.add(rightAdjacentNode);
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean isValidNode(Node node){
+        return node != null && !node.isVisited();
     }
 
     private int minValue(Node current){
